@@ -1,14 +1,15 @@
 
+import java.awt.event.KeyListener;
+import java.util.Scanner;
+import java.util.Random;
 
 public class App {
 
 	public static void main(String[] args) throws Exception {
-		System.out.println("Grid Games");
+		System.out.println("Squid Game");
 		// Prints the updated game
 		printBoard(gameBoard());
 		System.out.println();
-
-		System.out.println(theeCOW());
 
 	}
 
@@ -22,13 +23,15 @@ public class App {
 		// with game
 
 		// Game Code:
-		game = writeBlock(SetGameBoard(9,9), 1, 0, 't');
+		game = writeBlock(SetGameBoard(9, 9, '*'), 1, 0, 't');
 
 		game = writeBlock(game, 0, 1, 't');
 
 		game = writeBlockBoolean(game, 1, 1, 'd', true);
 
+		// char rows[] = tempp( 0, game);
 		game = reverseRow(game, 0);
+		game  = reverseCol(game, 0);
 
 		// Code ends here:
 		return game;
@@ -36,13 +39,13 @@ public class App {
 	}
 
 	// Create the game board
-	public static char[][] SetGameBoard(int height, int length) {
+	public static char[][] SetGameBoard(int height, int length, char symbol) {
 		// uses height and width in * units
 		char[][] gameboard = new char[length][height];
 		// Nested for loop to create 2d grid
 		for (int ii = 0; ii < gameboard.length; ii++) {
 			for (int jj = 0; jj < gameboard[ii].length; jj++) {
-				gameboard[ii][jj] = '*';
+				gameboard[ii][jj] = symbol;
 			}
 		}
 		return gameboard;
@@ -80,36 +83,46 @@ public class App {
 		return arr;
 	}
 
-	// FIX!! Does not reverse char
+	// this is a tempory method to store a value of the original game before any
+	// changes, but this only uses rows
+	public static char[] tempBeforeRow(int row, char arr[][]) {
+		char[] rows = new char[arr.length];
+		for (int jj = 0; jj < arr.length; jj++) {
+			rows[jj] = arr[jj][row];
+
+		}
+		return rows;
+	}
+	public static char[] tempBeforeCol(int col, char arr[][]){
+		char[] cols = new char [arr.length];
+		for (int i = 0; i <arr.length;i++){
+			cols[i] = arr[col][i];
+
+		}
+		return cols;
+
+	}
+	
 	public static char[][] reverseRow(char arr[][], int row) {
+		char rows[] = tempBeforeRow(0, arr);
 		int nums = 0;
-		final char[][] mems = arr;
 		for (int i = 0; i < arr.length; i++) {
 			nums++;
-			arr[row][i] = mems[row][mems.length - nums];
+			arr[row][i] = rows[rows.length - nums];
 		}
 		return arr;
 	}
 
-	public static char[] theeCOW() {
-		char cow[] = {'a','b','c','d','e','f'};
-		char temp;
-		int nums =0;
-		//final char[] mems = cow;
-
-		for (int i = 0; i < cow.length; i++) {
-			temp = cow[i];
+	public static char[][] reverseCol(char arr[][], int col){
+		char cols[] = tempBeforeCol(0, arr);
+		int nums = 0;
+		for (int i = 0; i < arr.length; i++) {
 			nums++;
-			//cow[i] = mems[mems.length - i-1];
-			for(int j =0;i<cow.length;j++){
-				cow[cow.length - nums] = temp;
-			}
+			arr[i][col] = cols[cols.length - nums];
 		}
-		System.out.println(cow.length);
-		return cow;
-		
-	
-	
+		return arr;
 	}
 
-}
+
+	}
+
