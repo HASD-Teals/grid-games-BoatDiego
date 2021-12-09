@@ -31,7 +31,11 @@ public class App {
 
 		// char rows[] = tempp( 0, game);
 		game = reverseRow(game, 0);
-		game  = reverseCol(game, 0);
+		game = reverseCol(game, 0);
+		// Score test
+		scoreCount(game, 't');
+		//blast test
+		game = blast(game, 'c', 4, 4);
 
 		// Code ends here:
 		return game;
@@ -93,16 +97,18 @@ public class App {
 		}
 		return rows;
 	}
-	public static char[] tempBeforeCol(int col, char arr[][]){
-		char[] cols = new char [arr.length];
-		for (int i = 0; i <arr.length;i++){
+
+	public static char[] tempBeforeCol(int col, char arr[][]) {
+		char[] cols = new char[arr.length];
+		for (int i = 0; i < arr.length; i++) {
 			cols[i] = arr[col][i];
 
 		}
 		return cols;
 
 	}
-	
+
+	// Reverses all the content from that row
 	public static char[][] reverseRow(char arr[][], int row) {
 		char rows[] = tempBeforeRow(0, arr);
 		int nums = 0;
@@ -113,7 +119,8 @@ public class App {
 		return arr;
 	}
 
-	public static char[][] reverseCol(char arr[][], int col){
+	// reverses all the content from that column
+	public static char[][] reverseCol(char arr[][], int col) {
 		char cols[] = tempBeforeCol(0, arr);
 		int nums = 0;
 		for (int i = 0; i < arr.length; i++) {
@@ -123,6 +130,33 @@ public class App {
 		return arr;
 	}
 
+	// Looks at every char one by one and makes score increment by 1 if = symbol
+	public static void scoreCount(char arr[][], char symbol) {
+		int score = 0;
+		for (int ii = 0; ii < arr.length; ii++) {
+			for (int jj = 0; jj < arr[ii].length; jj++) {
+				if (arr[ii][jj] == symbol) {
+					score++;
+				}
+
+			}
+		}
+		System.out.println("Score is: " + score);
 
 	}
 
+	public static char[][] blast(char arr[][], char symbol, int row, int col) {
+		for (int i = 0; i < 3; i++){
+			for (int l = 0; l<3; l++){
+
+				
+			}
+		}
+		
+		
+		
+		
+		
+		return arr;
+	}
+}
